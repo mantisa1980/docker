@@ -2,6 +2,7 @@ FROM ubuntu:14.04
 
 MAINTAINER duyhsieh
 
+ENV DEBIAN_FRONTEND noninteractive
 
 RUN echo "deb http://free.nchc.org.tw/ubuntu/ trusty main restricted universe multiverse" > /etc/apt/sources.list
 RUN echo "deb http://free.nchc.org.tw/ubuntu/ trusty-security main restricted universe multiverse" >> /etc/apt/sources.list
