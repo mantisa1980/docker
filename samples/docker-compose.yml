@@ -1,0 +1,47 @@
+version: '2'
+services:
+  ap:
+    image: base 
+    ports: 
+      - "80:80"
+      - "8080:8080"
+    working_dir: "/code"
+    volumes_from:
+      - code
+    depends_on:
+      - mongo
+      - redis
+    links:
+      - mongo
+      - redis
+    tty: true # to keep it alive, however this triggers http error exception on docker-compose up(container still running ,though)
+
+   mongo:
+    image: mongo
+    volumes_from:
+      - mongo-data
+    #ports:
+    #  - "27017:27017"
+  
+  redis: # todo: persistence
+    image: redis
+    volumes_from:
+      - redis-data
+    #ports:
+    #  - "6379:6379"
+
+ # volumes
+  code: # can be mounted and used as data volume even stopped.
+    image: ubuntu
+    volumes:
+      - ../../:/code:rw
+   
+  mongo-data:
+    image: ubuntu
+    volumes:
+      - /tmp/mongo-data:/data/db:rw
+  
+  redis-data:
+    image: ubuntu
+    volumes:
+      - /tmp/redis-data:/data:rw

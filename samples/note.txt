@@ -1,0 +1,11 @@
+# gs
+docker exec -ti docker_base_1 bash
+
+# check redis
+docker exec -ti docker_redis_1 redis-cli
+
+# check mongo
+docker exec -ti docker_mongo_1 mongo
+
+# launch
+docker-compose up -d
