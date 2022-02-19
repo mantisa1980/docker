@@ -8,14 +8,25 @@ services:
     environment:
       - POSTGRES_PASSWORD=secret
       - POSTGRES_USER=redmine
-  
+    volumes:
+      - type: volume
+        source: redmine-db-data
+        target: /var/lib/postgresql/data
+
   redmine:
     image: redmine
     ports: 
       - "3000:3000"
     tty: true
+    volumes:
+      - type: volume
+        source: redmine-data
+        target: /usr/src/redmine/files
     environment:
       - REDMINE_DB_POSTGRES=postgres
       - REDMINE_DB_USERNAME=redmine
       - REDMINE_DB_PASSWORD=secret
 
+volumes:
+  redmine-db-data:
+  redmine-data:
