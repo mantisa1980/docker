@@ -1,0 +1,21 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    ports: 
+      - "8080:8080"
+    tty: true 
+    environment:
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_USER=redmine
+  
+  redmine:
+    image: redmine
+    ports: 
+      - "3000:3000"
+    tty: true
+    environment:
+      - REDMINE_DB_POSTGRES=postgres
+      - REDMINE_DB_USERNAME=redmine
+      - REDMINE_DB_PASSWORD=secret
+
